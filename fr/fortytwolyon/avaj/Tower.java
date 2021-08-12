@@ -2,19 +2,22 @@ package fr.fortytwolyon.avaj;
 
 import java.util.HashSet;
 
-public class Tower {
+/* design pattern observer */
+
+public abstract class Tower {
     private HashSet<Flyable> observers = new HashSet<Flyable>();
 
     public void register(Flyable flyable) {
-        observers.add(flyable);
+        this.observers.add(flyable);
     }
 
     public void unregister(Flyable flyable) {
-        observers.remove(flyable);
+        this.observers.remove(flyable);
     }
 
     protected void conditionsChanged() {
-        
+        for (Flyable observer : observers) {
+            observer.updateConditions();
+        }
     }
-
 }
